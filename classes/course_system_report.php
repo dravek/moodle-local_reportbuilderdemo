@@ -36,9 +36,11 @@ class course_system_report extends system_report {
     protected function initialise(): void {
         $entity = new course();
 
+        // Set the main report entity.
         $this->set_main_table('course', $entity->get_table_alias('course'));
         $this->add_entity($entity);
 
+        // Add columns to the report.
         $columns = [
             'course:coursefullnamewithlink',
             'course:shortname',
@@ -50,6 +52,7 @@ class course_system_report extends system_report {
         ];
         $this->add_columns_from_entities($columns);
 
+        // Add filters to our report.
         $filters = [
             'course:fullname',
             'course:shortname',
@@ -60,6 +63,9 @@ class course_system_report extends system_report {
             'course:visible',
         ];
         $this->add_filters_from_entities($filters);
+
+        // Set report as downloadable.
+        $this->set_downloadable(true);
     }
 
     /**
