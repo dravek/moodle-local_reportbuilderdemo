@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace local_reportbuilderdemo;
 
 use core_reportbuilder\local\entities\course;
+use core_reportbuilder\local\helpers\database;
 use core_reportbuilder\system_report;
 
 /**
@@ -35,10 +36,15 @@ class course_system_report extends system_report {
      */
     protected function initialise(): void {
         $entity = new course();
+        $coursetablealias = $entity->get_table_alias('course');
+        $param = database::generate_param_name();
 
-        // Set the main report entity.
-        $this->set_main_table('course', $entity->get_table_alias('course'));
+        // Set the main report table.
+        $this->set_main_table('course', $coursetablealias);
+        // Add course entity to the report.
         $this->add_entity($entity);
+        // Add a base condition to hide the site course.
+        $this->add_base_condition_sql("$coursetablealias.id <> :$param", [$param => SITEID]);
 
         // Add columns to the report.
         $columns = [
@@ -64,8 +70,8 @@ class course_system_report extends system_report {
         ];
         $this->add_filters_from_entities($filters);
 
-        // Set report as downloadable.
-        $this->set_downloadable(true);
+        // Set report as downloadable and set our custom file name.
+        $this->set_downloadable(true, 'myfilename');
     }
 
     /**
