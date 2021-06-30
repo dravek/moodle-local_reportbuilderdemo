@@ -29,7 +29,7 @@ require_once('../../config.php');
 
 require_login();
 
-$PAGE->set_url(new moodle_url('/local/reportbuilderdemo/index.php'));
+$PAGE->set_url(new moodle_url('/local/reportbuilderdemo/user.php'));
 $PAGE->set_context(context_system::instance());
 $PAGE->set_title(get_string('user', 'local_reportbuilderdemo'));
 
