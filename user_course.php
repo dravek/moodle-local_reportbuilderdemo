@@ -23,7 +23,7 @@
 declare(strict_types=1);
 
 use core_reportbuilder\system_report_factory;
-use local_reportbuilderdemo\course_system_report;
+use local_reportbuilderdemo\{course_system_report,user_system_report};
 
 require_once('../../config.php');
 
@@ -31,13 +31,16 @@ require_login();
 
 $PAGE->set_url(new moodle_url('/local/reportbuilderdemo/index.php'));
 $PAGE->set_context(context_system::instance());
-$PAGE->set_title(get_string('pluginname', 'local_reportbuilderdemo'));
+$PAGE->set_title(get_string('usercourse', 'local_reportbuilderdemo'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname', 'local_reportbuilderdemo'));
+echo $OUTPUT->heading(get_string('usercourse', 'local_reportbuilderdemo'));
 
-// Create report instance.
-$report = system_report_factory::create(course_system_report::class, context_system::instance());
-echo $report->output();
+// Create report instances. This is to demonstrate that we can have more than one report in the same page.
+$coursereport = system_report_factory::create(course_system_report::class, context_system::instance());
+echo $coursereport->output();
+
+$userreport = system_report_factory::create(user_system_report::class, context_system::instance());
+echo $userreport->output();
 
 echo $OUTPUT->footer();

@@ -25,7 +25,18 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) { // Needs this condition or there is error on login page.
-    $ADMIN->add('development', new admin_externalpage('local_reportbuilderdemo',
-        get_string('pluginname', 'local_reportbuilderdemo'),
-        new moodle_url('/local/reportbuilderdemo/index.php')));
+    // Report with the list of courses.
+    $ADMIN->add('development', new admin_externalpage('local_reportbuilderdemo_course',
+        get_string('course', 'local_reportbuilderdemo'),
+        new moodle_url('/local/reportbuilderdemo/course.php')));
+
+    // Report with the list of users.
+    $ADMIN->add('development', new admin_externalpage('local_reportbuilderdemo_user',
+        get_string('user', 'local_reportbuilderdemo'),
+        new moodle_url('/local/reportbuilderdemo/user.php')));
+
+    // Both reports on the same page.
+    $ADMIN->add('development', new admin_externalpage('local_reportbuilderdemo_usercourse',
+        get_string('usercourse', 'local_reportbuilderdemo'),
+        new moodle_url('/local/reportbuilderdemo/user_course.php')));
 }
