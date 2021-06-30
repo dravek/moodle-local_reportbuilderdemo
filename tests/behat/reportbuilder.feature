@@ -14,8 +14,8 @@ Feature: View a report
   @javascript
   Scenario: View course report
     Given I log in as "admin"
-    And I navigate to "Development > Report Builder demo" in site administration
-    Then I should see "Report Builder demo"
+    And I navigate to "Development > Report Builder - Course report demo" in site administration
+    Then I should see "Report Builder - Course report demo"
     # Check that report contains all three courses.
     And the following should exist in the "reportbuilder-table" table:
       | Course full name with link  | Course short name | Format        | Course visibility |
