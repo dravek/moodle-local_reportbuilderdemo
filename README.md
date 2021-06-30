@@ -1,4 +1,8 @@
-Demo and tests for Core Report builder
-=============================
+Demo and tests for Core Report Builder
+======================================
 
-This plugin contains a demo report and tests to test core reportbuilder component UI.
+This plugin contains three different reports and a Behat test for testing core reportbuilder component UI:
+
+- Course report
+- User report
+- User and Course reports both in the same page to demonstrate that one single page can contain multiple reports
