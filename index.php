@@ -22,24 +22,22 @@
 
 declare(strict_types=1);
 
-namespace local_reportbuilderdemo;
-
-use context_system;
 use core_reportbuilder\system_report_factory;
+use local_reportbuilderdemo\course_system_report;
 
 require_once('../../config.php');
 
 require_login();
 
-$url = new \moodle_url('/local/reportbuilderdemo/index.php');
-$PAGE->set_url($url);
+$PAGE->set_url(new moodle_url('/local/reportbuilderdemo/index.php'));
 $PAGE->set_context(context_system::instance());
+$PAGE->set_title(get_string('pluginname', 'local_reportbuilderdemo'));
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('pluginname', 'local_reportbuilderdemo'));
 
 // Create report instance.
 $report = system_report_factory::create(course_system_report::class, context_system::instance());
-
 echo $report->output();
+
 echo $OUTPUT->footer();
